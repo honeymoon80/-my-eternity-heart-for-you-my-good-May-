@@ -240,7 +240,12 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        const centerText = "I LOVE YOU TOO MUCH FOREVER MY GORGEOUS MAY";
+        // Texto ajustado para que quepa bien dentro del corazón
+        const centerTextLines = [
+            "I LOVE YOU TOO MUCH",
+            "FOREVER MY GORGEOUS",
+            "MAY <3"
+        ];
 
         let stars = [];
         let galaxies = [];
@@ -322,7 +327,6 @@
                 ctx.translate(g.x, g.y);
                 ctx.rotate(g.rotation);
 
-                // Elipse exterior de la galaxia
                 ctx.shadowBlur = 55;
                 ctx.shadowColor = g.color;
                 ctx.globalAlpha = 0.085;
@@ -331,14 +335,12 @@
                 ctx.ellipse(0, 0, g.size, g.size * 0.42, 0, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Segunda capa suave
                 ctx.globalAlpha = 0.045;
                 ctx.shadowBlur = 85;
                 ctx.beginPath();
                 ctx.ellipse(0, 0, g.size * 1.6, g.size * 0.6, 0, 0, Math.PI * 2);
                 ctx.fill();
 
-                // CÍRCULO CENTRAL del mismo color que la galaxia (como pediste)
                 ctx.shadowBlur = 25;
                 ctx.shadowColor = g.color;
                 ctx.globalAlpha = 0.75;
@@ -347,7 +349,6 @@
                 ctx.arc(0, 0, g.size * 0.26, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Texto
                 ctx.shadowBlur = 8;
                 ctx.shadowColor = '#ffffff';
                 ctx.fillStyle = "rgba(255, 255, 255, 0.93)";
@@ -363,7 +364,6 @@
                 ctx.restore();
             }
 
-            // Sistema solar
             const sunX = width * 0.22;
             const sunY = height * 0.28;
             ctx.shadowBlur = 35;
@@ -461,12 +461,21 @@
 
             heartPoints = generateHeartPoints(cx, cy, 12.8);
 
-            ctx.font = 'bold 54px Arial';
-            ctx.fillStyle = '#ff4da6';
-            ctx.textAlign = 'center';
+            // Texto centrado dentro del corazón (más pequeño y en 3 líneas)
             ctx.shadowBlur = 28;
             ctx.shadowColor = '#ff69b4';
-            ctx.fillText(centerText, cx, cy + 22);
+            ctx.fillStyle = '#ff4da6';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            ctx.font = 'bold 29px Arial';
+            ctx.fillText(centerTextLines[0], cx, cy - 18);
+
+            ctx.font = 'bold 27px Arial';
+            ctx.fillText(centerTextLines[1], cx, cy + 14);
+
+            ctx.font = 'bold 32px Arial';
+            ctx.fillText(centerTextLines[2], cx, cy + 48);
 
             for (let p of particles) {
                 p.update(heartPoints);
