@@ -43,16 +43,21 @@
 
         .title {
             position: absolute;
-            top: 25px;
+            top: 12px;
             left: 50%;
             transform: translateX(-50%);
             color: #ff4da6;
-            font-size: 34px;
+            font-size: 16.5px;
             font-weight: bold;
-            text-shadow: 0 0 15px #ff4da6, 0 0 30px #ff4da6;
+            text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6;
             z-index: 30;
             pointer-events: none;
             white-space: nowrap;
+            text-align: center;
+            max-width: 92%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 10px;
         }
 
         .music-btn {
@@ -135,7 +140,7 @@
             line-height: 1.7;
         }
         .letter::before {
-            content: '💕';
+            content: '💗';
             position: absolute;
             top: -35px;
             left: 50%;
@@ -182,7 +187,8 @@
     </style>
 </head>
 <body>
-    <div class="title">🌸💗Mi enamorado corazonshtito dedicado siempre a ti, mi bella y hermosísima amorshita de todita mi vida entera(^ω^)💗🌸</div>
+    <div class="title">🌸💗 Mi enamorado corazonshtito dedicado siempre a ti, mi bella y hermosísima amorshita de todita mi vida entera (^ω^)💗🌸</div>
+    
     <canvas id="canvas"></canvas>
 
     <button class="music-btn" onclick="toggleMusic()">
@@ -196,16 +202,16 @@
     <div id="letterModal" class="modal">
         <div class="letter">
             <button class="close-btn" onclick="closeLetter()">×</button>
-            <h2>Mi amor ❤️</h2>
-            <p>Te amo mushote mi May 🥹💗<br><br>
-            Eres lo más bonito que tengo en mi vida.<br>
-            Mi amolshita helmosha, mi princeshita de karamelo.<br><br>
-            Together forever contigo 💕<br><br>
-            Tuyo siempre,<br>
-            Liam</p>
+            <h2>Mi eterna y helmosha galaxia de mi korashon:3💗🌟</h2>
+            <p>Un fugaz y eterno recordatorio de lo tan importante k eres para mí<br><br>
+            tu preciosha y majestuosa divinidad siempre ilumina toditosh mis diash<br>
+            tú eresh todito mi universho en donde siempre woa kerel vivir hasta la eternidad de nuestro infinito amolshito🥹💗💕<br><br>
+            siempre kontigo mi vidita entera(^ω^)💗🩷<br><br>
+            atte: tu noble y apasionado caballero<br>
+            Liam wiiii \(≧▽≦)/❤️‍🔥✨️</p>
 
             <div class="love-bar">
-                <label>kuánto me kieresh?\(≧▽≦)/❤️‍🔥</label>
+                <label>kuánto me kieresh?(≧▽≦)💗🔥</label>
                 <input type="range" id="loveSlider" min="0" max="100000" value="0" oninput="updateLoveValue()">
                 <div class="love-value" id="loveValue">0</div>
             </div>
@@ -243,7 +249,7 @@
         const galaxyTexts = [
             "L♡M forever",
             "Liam♡May",
-            "I love you too much\nforever my good May<3"
+            "I love you too much\nforever my good May<3♡"
         ];
 
         function createBackgroundElements() {
@@ -268,12 +274,12 @@
                     baseY: height * (0.12 + row * 0.22 + (Math.random() - 0.5) * 0.08),
                     x: 0,
                     y: 0,
-                    size: Math.random() * 50 + 34,
+                    size: Math.random() * 52 + 36,
                     offset: Math.random() * Math.PI * 2,
-                    speed: 0.9 + Math.random() * 1.1,
+                    speed: 1.45 + Math.random() * 1.35,
                     color: galaxyColors[i % galaxyColors.length],
                     rotation: Math.random() * Math.PI * 2,
-                    rotSpeed: (Math.random() - 0.5) * 0.007,
+                    rotSpeed: (Math.random() - 0.5) * 0.009,
                     textIndex: i % galaxyTexts.length
                 });
             }
@@ -308,39 +314,50 @@
             ctx.globalAlpha = 1;
 
             for (let g of galaxies) {
-                g.x = g.baseX + Math.sin(time * 0.0018 + g.offset) * 65;
-                g.y = g.baseY + Math.cos(time * 0.0015 + g.offset) * 55;
-
+                g.x = g.baseX + Math.sin(time * 0.0016 + g.offset) * 68;
+                g.y = g.baseY + Math.cos(time * 0.0013 + g.offset) * 58;
                 g.rotation += g.rotSpeed;
 
                 ctx.save();
                 ctx.translate(g.x, g.y);
                 ctx.rotate(g.rotation);
 
-                ctx.shadowBlur = 45;
+                // Elipse exterior de la galaxia
+                ctx.shadowBlur = 55;
                 ctx.shadowColor = g.color;
-                ctx.globalAlpha = 0.13;
+                ctx.globalAlpha = 0.085;
                 ctx.fillStyle = g.color;
                 ctx.beginPath();
-                ctx.ellipse(0, 0, g.size, g.size * 0.4, 0, 0, Math.PI * 2);
+                ctx.ellipse(0, 0, g.size, g.size * 0.42, 0, 0, Math.PI * 2);
                 ctx.fill();
 
-                ctx.globalAlpha = 0.07;
-                ctx.shadowBlur = 70;
+                // Segunda capa suave
+                ctx.globalAlpha = 0.045;
+                ctx.shadowBlur = 85;
                 ctx.beginPath();
-                ctx.ellipse(0, 0, g.size * 1.5, g.size * 0.55, 0, 0, Math.PI * 2);
+                ctx.ellipse(0, 0, g.size * 1.6, g.size * 0.6, 0, 0, Math.PI * 2);
                 ctx.fill();
 
-                ctx.shadowBlur = 10;
+                // CÍRCULO CENTRAL del mismo color que la galaxia (como pediste)
+                ctx.shadowBlur = 25;
+                ctx.shadowColor = g.color;
+                ctx.globalAlpha = 0.75;
+                ctx.fillStyle = g.color;
+                ctx.beginPath();
+                ctx.arc(0, 0, g.size * 0.26, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Texto
+                ctx.shadowBlur = 8;
                 ctx.shadowColor = '#ffffff';
                 ctx.fillStyle = "rgba(255, 255, 255, 0.93)";
-                ctx.font = "bold 13.5px Arial";
+                ctx.font = "bold 13px Arial";
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
 
                 const lines = galaxyTexts[g.textIndex].split('\n');
                 for (let i = 0; i < lines.length; i++) {
-                    ctx.fillText(lines[i], 0, (i - (lines.length-1)/2) * 16);
+                    ctx.fillText(lines[i], 0, (i - (lines.length-1)/2) * 15);
                 }
 
                 ctx.restore();
@@ -468,7 +485,6 @@
         createBackgroundElements();
         animate();
 
-        // Zoom
         canvas.addEventListener('wheel', function(e) {
             e.preventDefault();
             const factor = e.deltaY < 0 ? 1.08 : 0.93;
@@ -483,11 +499,10 @@
             if (zoom > 3.0) zoom = 3.0;
         });
 
-        // ====================== INTERACCIONES ======================
         document.addEventListener('DOMContentLoaded', function() {
             const body = document.body;
             const explosionColors = ['#FFB6C1','#FFD700','#98FB98','#ADD8E6','#E6E6FA','#FFA07A','#87CEFA','#FFDEAD','#F0E68C','#DDA0DD'];
-            const heartEmojis = ['❤️', '💗', '💕', '💞', '💓', '💖', '🩷', '(≧▽≦)', '🥹💗', '❤️‍🔥', '🇧🇴', '🍬'];
+            const heartEmojis = ['❤️', '💗', '💕', '💞', '💓', '💖', '🩷', '(≧▽≦)', '🥹💗', '❤️‍🔥', '🇧🇴', '🍬', '(〃∇〃人)', '🌸', '💐'];
 
             const frasesAmor = [
                 'Te amo mushote mi May🥹💗✨️','Mi amolshita helmosha de mo korashon',
@@ -504,10 +519,8 @@
             });
 
             function createExplosion(e) {
-                // Coordenadas exactas del clic (corregido)
                 let clickX = e.clientX || (e.touches && e.touches[0].clientX);
                 let clickY = e.clientY || (e.touches && e.touches[0].clientY);
-
                 if (!clickX || !clickY) return;
 
                 for (let i = 0; i < 38; i++) {
@@ -619,4 +632,4 @@
         });
     </script>
 </body>
-  </html>
+</html>
